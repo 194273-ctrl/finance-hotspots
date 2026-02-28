@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>财经热点报告 - 历史报告列表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px 20px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+        
+        .report-list {
+            list-style: none;
+        }
+        
+        .report-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .report-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        .report-item.latest {
+            border: 2px solid #4ade80;
+            background: rgba(74, 222, 128, 0.1);
+        }
+        
+        .report-info {
+            flex: 1;
+        }
+        
+        .report-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .report-date {
+            font-size: 13px;
+            opacity: 0.7;
+        }
+        
+        .badge {
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        
+        .badge-latest {
+            background: #4ade80;
+            color: #1a1a2e;
+        }
+        
+        .report-link {
+            background: #667eea;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .report-link:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            opacity: 0.6;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 财经热点报告</h1>
+            <p>历史报告列表</p>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">📑 所有报告</div>
+            <ul class="report-list">
+                <li class="report-item latest">
+                    <div class="report-info">
+                        <div class="report-title">
+                            财经热点报告 - 2026年2月28日
+                            <span class="badge badge-latest">最新</span>
+                        </div>
+                        <div class="report-date">生成时间：2026-02-28</div>
+                    </div>
+                    <a href="finance-hotspots-2026-02-28.html" class="report-link">查看</a>
+                </li>
+                
+                <li class="report-item">
+                    <div class="report-info">
+                        <div class="report-title">财经热点报告 - 2026年3月2日</div>
+                        <div class="report-date">生成时间：2026-03-02</div>
+                    </div>
+                    <a href="finance-hotspots-2026-03-02.html" class="report-link">查看</a>
+                </li>
+                
+                <li class="report-item">
+                    <div class="report-info">
+                        <div class="report-title">财经热点报告 - 2026年3月1日</div>
+                        <div class="report-date">生成时间：2026-03-01</div>
+                    </div>
+                    <a href="finance-hotspots-2026-03-01.html" class="report-link">查看</a>
+                </li>
+                
+                <li class="report-item">
+                    <div class="report-info">
+                        <div class="report-title">财经热点报告 - 测试版</div>
+                        <div class="report-date">生成时间：2026-02-28</div>
+                    </div>
+                    <a href="finance-hotspots-2026-02-28-test.html" class="report-link">查看</a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="footer">
+            <p>💡 提示：标记为"最新"的报告为当日最新生成</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,973 @@
+{
+  "name": "财经热点监控",
+  "version": "1.1.0",
+  "description": "实时监控国内外权威媒体、社交平台和资本市场的财经热点事件，重点关注科技领域和存储芯片行业，支持个性化股票和行业跟踪，新增国际热点事件深度监控",
+  "author": "AI Assistant",
+  "category": "data-analysis",
+  "metadata": {
+    "createdAt": "2026-02-28T18:00:00.000Z",
+    "updatedAt": "2026-03-02T00:00:00.000Z",
+    "changelog": [
+      {
+        "version": "1.1.0",
+        "date": "2026-03-02",
+        "changes": [
+          "新增国际热点事件深度监控工作流",
+          "增强地缘政治事件收集",
+          "添加宏观经济政策监控",
+          "增加重大企业事件追踪",
+          "优化影响评估和优先级排序",
+          "完善报告结构，新增国际热点事件板块"
+        ]
+      },
+      {
+        "version": "1.0.0",
+        "date": "2026-02-28",
+        "changes": [
+          "初始版本发布",
+          "基础媒体热点收集",
+          "资本市场数据收集",
+          "科技领域监控",
+          "个性化股票跟踪",
+          "网页报告生成"
+        ]
+      }
+    ]
+  },
+  "capabilities": {
+    "tools": [
+      "web-search",
+      "api-client",
+      "database",
+      "file-manager"
+    ],
+    "workflows": [
+      {
+        "id": "workflow-1",
+        "name": "媒体热点收集",
+        "description": "扫描国内外权威媒体和社交平台，收集过去24小时财经热点事件",
+        "steps": [
+          {
+            "id": "step-1",
+            "name": "搜索国内权威媒体",
+            "action": "web-search",
+            "parameters": {
+              "sources": [
+                "新浪财经",
+                "东方财富",
+                "证券时报",
+                "第一财经",
+                "财新网"
+              ],
+              "keywords": [
+                "财经",
+                "热点",
+                "市场",
+                "股市",
+                "经济"
+              ],
+              "timeRange": "24h"
+            }
+          },
+          {
+            "id": "step-2",
+            "name": "搜索国际权威媒体",
+            "action": "web-search",
+            "parameters": {
+              "sources": [
+                "Bloomberg",
+                "Reuters",
+                "Wall Street Journal",
+                "Financial Times",
+                "CNBC"
+              ],
+              "keywords": [
+                "finance",
+                "hot topics",
+                "market",
+                "stock",
+                "economy"
+              ],
+              "timeRange": "24h"
+            }
+          },
+          {
+            "id": "step-3",
+            "name": "搜索社交平台",
+            "action": "web-search",
+            "parameters": {
+              "platforms": [
+                "Twitter/X",
+                "Reddit",
+                "Weibo",
+                "雪球"
+              ],
+              "keywords": [
+                "财经热点",
+                "股市动态",
+                "投资话题"
+              ],
+              "timeRange": "24h"
+            }
+          },
+          {
+            "id": "step-4",
+            "name": "去重和分类",
+            "action": "data-process",
+            "parameters": {
+              "operation": "deduplicate-and-categorize"
+            }
+          }
+        ],
+        "triggerConditions": [
+          "定时触发: 每天 9:00, 13:00, 17:00（以当前时间回溯24小时）",
+          "手动触发（以当前时间回溯24小时）"
+        ]
+      },
+      {
+        "id": "workflow-2",
+        "name": "资本市场数据收集",
+        "description": "收集美股、伦敦期货、A股、香港股市的实时数据和行情",
+        "steps": [
+          {
+            "id": "step-1",
+            "name": "收集美股数据",
+            "action": "api-client",
+            "parameters": {
+              "endpoint": "us-stock-market",
+              "indices": [
+                "S&P 500",
+                "NASDAQ",
+                "DOW JONES"
+              ],
+              "includeTopStocks": true
+            }
+          },
+          {
+            "id": "step-2",
+            "name": "收集伦敦期货数据",
+            "action": "api-client",
+            "parameters": {
+              "endpoint": "london-futures",
+              "commodities": [
+                "原油",
+                "黄金",
+                "白银",
+                "铜",
+                "天然气"
+              ]
+            }
+          },
+          {
+            "id": "step-3",
+            "name": "收集A股数据",
+            "action": "api-client",
+            "parameters": {
+              "endpoint": "a-stock",
+              "indices": [
+                "上证指数",
+                "深证成指",
+                "创业板指"
+              ],
+              "includeTopStocks": true
+            }
+          },
+          {
+            "id": "step-4",
+            "name": "收集港股数据",
+            "action": "api-client",
+            "parameters": {
+              "endpoint": "hk-stock",
+              "indices": [
+                "恒生指数",
+                "国企指数",
+                "红筹指数"
+              ],
+              "includeTopStocks": true
+            }
+          },
+          {
+            "id": "step-5",
+            "name": "数据汇总分析",
+            "action": "data-process",
+            "parameters": {
+              "operation": "aggregate-and-analyze"
+            }
+          }
+        ],
+        "triggerConditions": [
+          "定时触发: 每小时",
+          "市场交易时间每30分钟",
+          "手动触发"
+        ]
+      },
+      {
+        "id": "workflow-3",
+        "name": "科技领域和存储芯片专项监控",
+        "description": "重点关注科技领域和存储芯片行业的最新动态",
+        "steps": [
+          {
+            "id": "step-1",
+            "name": "搜索科技热点",
+            "action": "web-search",
+            "parameters": {
+              "keywords": [
+                "AI",
+                "芯片",
+                "半导体",
+                "存储芯片",
+                "DRAM",
+                "NAND Flash",
+                "人工智能",
+                "云计算",
+                "5G"
+              ],
+              "sources": [
+                "科技媒体",
+                "行业报告",
+                "公司公告"
+              ],
+              "timeRange": "24h"
+            }
+          },
+          {
+            "id": "step-2",
+            "name": "搜索存储芯片价格",
+            "action": "web-search",
+            "parameters": {
+              "keywords": [
+                "存储芯片价格",
+                "DRAM价格",
+                "NAND价格",
+                "SSD价格"
+              ],
+              "sources": [
+                "行业数据网站",
+                "厂商公告"
+              ]
+            }
+          },
+          {
+            "id": "step-3",
+            "name": "搜索相关上市公司",
+            "action": "web-search",
+            "parameters": {
+              "companies": [
+                "三星电子",
+                "SK海力士",
+                "美光科技",
+                "西部数据",
+                "长江存储",
+                "中芯国际",
+                "台积电"
+              ],
+              "keywords": [
+                "财报",
+                "产能",
+                "需求",
+                "供应"
+              ]
+            }
+          },
+          {
+            "id": "step-4",
+            "name": "行业分析报告生成",
+            "action": "data-process",
+            "parameters": {
+              "operation": "generate-industry-report"
+            }
+          }
+        ],
+        "triggerConditions": [
+          "定时触发: 每天 10:00, 14:00",
+          "手动触发"
+        ]
+      },
+      {
+        "id": "workflow-4",
+        "name": "个性化股票跟踪",
+        "description": "根据用户配置的股票代码和行业名称，收集相关信息",
+        "steps": [
+          {
+            "id": "step-1",
+            "name": "读取用户配置",
+            "action": "database",
+            "parameters": {
+              "operation": "read",
+              "collection": "user_preferences",
+              "key": "watchlist"
+            }
+          },
+          {
+            "id": "step-2",
+            "name": "搜索跟踪股票信息",
+            "action": "web-search",
+            "parameters": {
+              "sources": [
+                "watchlist"
+              ]
+            }
+          },
+          {
+            "id": "step-3",
+            "name": "搜索跟踪行业信息",
+            "action": "web-search",
+            "parameters": {
+              "sources": [
+                "industry_list"
+              ]
+            }
+          },
+          {
+            "id": "step-4",
+            "name": "推送更新到收集范围",
+            "action": "database",
+            "parameters": {
+              "operation": "update",
+              "collection": "collection_scope",
+              "data": {
+                "additionalStocks": true,
+                "additionalIndustries": true
+              }
+            }
+          }
+        ],
+        "triggerConditions": [
+          "用户配置更新",
+          "定时触发: 每小时",
+          "手动触发"
+        ]
+      },
+      {
+        "id": "workflow-5",
+        "name": "生成网页报告",
+        "description": "将收集的所有信息整理成结构化的网页报告",
+        "steps": [
+          {
+            "id": "step-1",
+            "name": "收集所有数据源",
+            "action": "database",
+            "parameters": {
+              "operation": "read-all",
+              "collections": [
+                "media_news",
+                "market_data",
+                "tech_news",
+                "international_events",
+                "user_watchlist"
+              ]
+            }
+          },
+          {
+            "id": "step-2",
+            "name": "分析和排序",
+            "action": "data-process",
+            "parameters": {
+              "operation": "analyze-and-prioritize",
+              "sortBy": [
+                "重要性",
+                "时间",
+                "相关性"
+              ]
+            }
+          },
+          {
+            "id": "step-3",
+            "name": "生成报告结构",
+            "action": "data-process",
+            "parameters": {
+              "operation": "generate-report-structure",
+              "sections": [
+                "市场概览",
+                "国际热点事件",
+                "今日热点",
+                "资本市场表现",
+                "科技与芯片专题",
+                "个性化关注",
+                "风险提示"
+              ]
+            }
+          },
+          {
+            "id": "step-4",
+            "name": "生成HTML报告",
+            "action": "file-manager",
+            "parameters": {
+              "operation": "write",
+              "format": "html",
+              "template": "finance-report",
+              "output": "reports/finance-hotspots-{date}.html"
+            }
+          },
+          {
+            "id": "step-5",
+            "name": "更新历史记录",
+            "action": "database",
+            "parameters": {
+              "operation": "insert",
+              "collection": "report_history",
+              "data": {
+                "timestamp": "auto",
+                "filePath": "auto"
+              }
+            }
+          }
+        ],
+        "triggerConditions": [
+          "用户查询触发（自动生成）",
+          "每日 18:00",
+          "所有数据收集完成后",
+          "手动触发"
+        ]
+      },
+      {
+        "id": "workflow-6",
+        "name": "国际热点事件深度监控",
+        "description": "专门收集过去24小时内最新的国际热点事件，重点监控对经济投资影响重大的事件。以当前时间为起点，回溯24小时内的信息",
+        "steps": [
+          {
+            "id": "step-1",
+            "name": "确定时间范围",
+            "action": "data-process",
+            "parameters": {
+              "operation": "calculate-time-range",
+              "baseTime": "current",
+              "range": "24h",
+              "output": {
+                "startTime": "current_time - 24h",
+                "endTime": "current_time"
+              }
+            }
+          },
+          {
+            "id": "step-2",
+            "name": "搜索地缘政治事件",
+            "action": "web-search",
+            "parameters": {
+              "keywords": [
+                "地缘政治",
+                "国际冲突",
+                "中东局势",
+                "美伊关系",
+                "俄乌局势",
+                "台海局势",
+                "中美关系",
+                "贸易战",
+                "制裁",
+                "战争",
+                "冲突",
+                "和平谈判"
+              ],
+              "impactKeywords": [
+                "油价",
+                "股市",
+                "汇率",
+                "经济",
+                "投资",
+                "市场",
+                "避险",
+                "通胀",
+                "供应链"
+              ],
+              "sources": [
+                "国际新闻社",
+                "权威媒体",
+                "政府公告",
+                "外交声明"
+              ],
+              "timeRange": "24h",
+              "timeRangeMode": "backward_from_current",
+              "priority": "high"
+            }
+          },
+          {
+            "id": "step-3",
+            "name": "搜索宏观经济政策",
+            "action": "web-search",
+            "parameters": {
+              "keywords": [
+                "美联储",
+                "央行政策",
+                "利率决议",
+                "降息",
+                "加息",
+                "量化宽松",
+                "货币政策",
+                "财政政策",
+                "通胀",
+                "GDP",
+                "就业数据",
+                "非农数据",
+                "CPI",
+                "PPI"
+              ],
+              "countries": [
+                "美国",
+                "欧盟",
+                "日本",
+                "英国",
+                "中国",
+                "印度"
+              ],
+              "sources": [
+                "央行官网",
+                "政府统计局",
+                "Bloomberg",
+                "Reuters",
+                "WSJ",
+                "FT"
+              ],
+              "timeRange": "24h",
+              "timeRangeMode": "backward_from_current",
+              "priority": "high"
+            }
+          },
+          {
+            "id": "step-4",
+            "name": "搜索重大企业事件",
+            "action": "web-search",
+            "parameters": {
+              "keywords": [
+                "财报",
+                "业绩",
+                "并购",
+                "重组",
+                "IPO",
+                "破产",
+                "裁员",
+                "重大投资",
+                "战略转型",
+                "CEO变动",
+                "监管处罚",
+                "反垄断"
+              ],
+              "companyTypes": [
+                "上市公司",
+                "科技巨头",
+                "金融机构",
+                "能源公司",
+                "制造业龙头"
+              ],
+              "impactFilter": {
+                "marketCap": ">100亿",
+                "impact": "高"
+              },
+              "sources": [
+                "公司公告",
+                "SEC文件",
+                "财经媒体",
+                "新闻稿"
+              ],
+              "timeRange": "24h",
+              "timeRangeMode": "backward_from_current",
+              "priority": "medium"
+            }
+          },
+          {
+            "id": "step-5",
+            "name": "搜索大宗商品和能源",
+            "action": "web-search",
+            "parameters": {
+              "keywords": [
+                "原油价格",
+                "黄金价格",
+                "白银价格",
+                "铜价",
+                "天然气",
+                "煤炭",
+                "铁矿石",
+                "农产品",
+                "粮食",
+                "供应链",
+                "能源危机",
+                "能源安全"
+              ],
+              "sources": [
+                "商品交易所",
+                "能源署",
+                "OPEC",
+                "IEA",
+                "行业报告"
+              ],
+              "timeRange": "24h",
+              "timeRangeMode": "backward_from_current",
+              "priority": "high"
+            }
+          },
+          {
+            "id": "step-6",
+            "name": "搜索国际监管政策",
+            "action": "web-search",
+            "parameters": {
+              "keywords": [
+                "监管政策",
+                "金融监管",
+                "科技监管",
+                "反垄断",
+                "数据隐私",
+                "网络安全",
+                "环保政策",
+                "碳关税",
+                "ESG",
+                "合规"
+              ],
+              "regions": [
+                "美国",
+                "欧盟",
+                "中国",
+                "英国",
+                "日本"
+              ],
+              "sources": [
+                "政府监管机构",
+                "立法机关",
+                "监管公告"
+              ],
+              "timeRange": "24h",
+              "timeRangeMode": "backward_from_current",
+              "priority": "medium"
+            }
+          },
+          {
+            "id": "step-7",
+            "name": "影响评估和优先级排序",
+            "action": "data-process",
+            "parameters": {
+              "operation": "assess-impact",
+              "criteria": {
+                "economicImpact": {
+                  "direct": true,
+                  "indirect": true,
+                  "longTerm": true,
+                  "shortTerm": true
+                },
+                "marketImpact": {
+                  "stocks": true,
+                  "bonds": true,
+                  "currencies": true,
+                  "commodities": true,
+                  "derivatives": true
+                },
+                "geographicScope": {
+                  "global": 10,
+                  "regional": 7,
+                  "national": 5,
+                  "local": 3
+                }
+              },
+              "sortBy": [
+                "impactScore",
+                "time",
+                "relevance"
+              ]
+            }
+          },
+          {
+            "id": "step-8",
+            "name": "生成事件摘要",
+            "action": "data-process",
+            "parameters": {
+              "operation": "generate-summary",
+              "format": {
+                "title": true,
+                "description": true,
+                "impact": true,
+                "source": true,
+                "timestamp": true,
+                "relatedMarkets": true
+              }
+            }
+          }
+        ],
+        "triggerConditions": [
+          "用户查询触发（自动生成）",
+          "定时触发: 每6小时",
+          "重大事件实时触发",
+          "手动触发"
+        ]
+      }
+    ],
+    "knowledgeBase": [
+      "财经知识",
+      "股票市场",
+      "期货交易",
+      "科技行业",
+      "半导体行业",
+      "存储技术",
+      "国际政治",
+      "宏观经济",
+      "地缘政治",
+      "大宗商品",
+      "能源市场"
+    ]
+  },
+  "configuration": {
+    "parameters": [
+      {
+        "name": "收集时间范围",
+        "type": "string",
+        "description": "设置热点事件收集的时间范围",
+        "required": false,
+        "defaultValue": "24h",
+        "validation": {
+          "enum": [
+            "1h",
+            "6h",
+            "12h",
+            "24h",
+            "48h",
+            "72h"
+          ]
+        }
+      },
+      {
+        "name": "更新频率",
+        "type": "string",
+        "description": "设置数据收集的更新频率",
+        "required": false,
+        "defaultValue": "hourly",
+        "validation": {
+          "enum": [
+            "realtime",
+            "15min",
+            "30min",
+            "hourly",
+            "2hours",
+            "daily"
+          ]
+        }
+      },
+      {
+        "name": "跟踪股票代码",
+        "type": "array",
+        "description": "自定义跟踪的股票代码列表",
+        "required": false,
+        "defaultValue": [],
+        "validation": {
+          "pattern": "^[A-Z]{1,4}$|^[0-9]{6}$"
+        }
+      },
+      {
+        "name": "跟踪行业名称",
+        "type": "array",
+        "description": "自定义跟踪的行业名称列表",
+        "required": false,
+        "defaultValue": [],
+        "validation": {
+          "min": 1,
+          "max": 20
+        }
+      },
+      {
+        "name": "优先关注领域",
+        "type": "array",
+        "description": "设置优先关注的领域，会在报告中优先展示",
+        "required": false,
+        "defaultValue": [
+          "存储芯片",
+          "人工智能",
+          "科技"
+        ],
+        "validation": {
+          "min": 0,
+          "max": 10
+        }
+      },
+      {
+        "name": "报告生成时间",
+        "type": "string",
+        "description": "设置每日报告生成的时间",
+        "required": false,
+        "defaultValue": "18:00",
+        "validation": {
+          "pattern": "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$"
+        }
+      },
+      {
+        "name": "是否推送通知",
+        "type": "boolean",
+        "description": "发现重要事件时是否推送通知",
+        "required": false,
+        "defaultValue": true
+      },
+      {
+        "name": "重要性阈值",
+        "type": "number",
+        "description": "设置事件重要性的最低阈值，低于阈值的事件不会包含在报告中",
+        "required": false,
+        "defaultValue": 3,
+        "validation": {
+          "min": 1,
+          "max": 10
+        }
+      },
+      {
+        "name": "国际事件优先级",
+        "type": "boolean",
+        "description": "是否优先收集国际重大事件",
+        "required": false,
+        "defaultValue": true
+      },
+      {
+        "name": "经济影响权重",
+        "type": "number",
+        "description": "设置经济影响在事件排序中的权重",
+        "required": false,
+        "defaultValue": 0.6,
+        "validation": {
+          "min": 0,
+          "max": 1
+        }
+      }
+    ],
+    "settings": {
+      "defaultWatchlist": {
+        "stocks": [
+          "AAPL",
+          "TSLA",
+          "NVDA",
+          "MSFT",
+          "000001",
+          "600519",
+          "00700"
+        ],
+        "industries": [
+          "半导体",
+          "存储芯片",
+          "人工智能",
+          "云计算",
+          "新能源"
+        ]
+      },
+      "mediaSources": {
+        "domestic": [
+          "新浪财经",
+          "东方财富",
+          "证券时报",
+          "第一财经",
+          "财新网",
+          "和讯网"
+        ],
+        "international": [
+          "Bloomberg",
+          "Reuters",
+          "WSJ",
+          "FT",
+          "CNBC",
+          "MarketWatch"
+        ],
+        "social": [
+          "Twitter/X",
+          "Reddit/r/investing",
+          "雪球",
+          "微博"
+        ]
+      },
+      "internationalEventCategories": {
+        "geopolitical": {
+          "priority": "high",
+          "keywords": [
+            "战争",
+            "冲突",
+            "制裁",
+            "外交",
+            "地缘政治"
+          ],
+          "impact": "高"
+        },
+        "economic": {
+          "priority": "high",
+          "keywords": [
+            "利率",
+            "通胀",
+            "GDP",
+            "就业",
+            "货币政策"
+          ],
+          "impact": "高"
+        },
+        "corporate": {
+          "priority": "medium",
+          "keywords": [
+            "财报",
+            "并购",
+            "IPO",
+            "重组"
+          ],
+          "impact": "中"
+        },
+        "commodities": {
+          "priority": "high",
+          "keywords": [
+            "原油",
+            "黄金",
+            "天然气",
+            "大宗商品"
+          ],
+          "impact": "高"
+        },
+        "regulatory": {
+          "priority": "medium",
+          "keywords": [
+            "监管",
+            "反垄断",
+            "合规",
+            "ESG"
+          ],
+          "impact": "中"
+        }
+      },
+      "marketIndices": {
+        "us": [
+          "S&P 500",
+          "NASDAQ",
+          "DOW JONES",
+          "Russell 2000"
+        ],
+        "london": [
+          "FTSE 100",
+          "FTSE 250"
+        ],
+        "china": [
+          "上证指数",
+          "深证成指",
+          "创业板指",
+          "科创50"
+        ],
+        "hk": [
+          "恒生指数",
+          "国企指数",
+          "红筹指数"
+        ]
+      },
+      "techFocusAreas": {
+        "chip": [
+          "存储芯片",
+          "DRAM",
+          "NAND Flash",
+          "SSD",
+          "HBM"
+        ],
+        "ai": [
+          "人工智能",
+          "机器学习",
+          "深度学习",
+          "GPU",
+          "TPU"
+        ],
+        "cloud": [
+          "云计算",
+          "数据中心",
+          "服务器",
+          "边缘计算"
+        ],
+        "other": [
+          "5G",
+          "物联网",
+          "区块链",
+          "量子计算"
+        ]
+      }
+    }
+  }
+}

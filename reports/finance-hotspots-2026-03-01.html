@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 今日财经热点日报 - 2026年3月1日</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header .date {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .market-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .market-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+        }
+
+        .market-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .market-card .flag {
+            font-size: 1.5em;
+            margin-right: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background: #f8f9fa;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .up {
+            color: #10b981;
+            font-weight: bold;
+        }
+
+        .down {
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        .event-card {
+            background: white;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-card.high {
+            border-left-color: #ef4444;
+        }
+
+        .event-card.medium {
+            border-left-color: #f59e0b;
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .event-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .priority-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            color: white;
+        }
+
+        .priority-badge.high {
+            background: #ef4444;
+        }
+
+        .priority-badge.medium {
+            background: #f59e0b;
+        }
+
+        .event-meta {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+        }
+
+        .event-content {
+            color: #444;
+            line-height: 1.8;
+        }
+
+        .chip-table {
+            margin-top: 20px;
+        }
+
+        .chip-table table {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .stock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stock-card {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .stock-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .stock-card p {
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .risk-section {
+            background: #fef3c7;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid #f59e0b;
+        }
+
+        .risk-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .risk-item h4 {
+            color: #f59e0b;
+            margin-bottom: 8px;
+        }
+
+        .risk-item p {
+            color: #666;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 2px solid #e5e7eb;
+        }
+
+        .emoji {
+            margin-right: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            table th, table td {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 今日财经热点日报</h1>
+            <div class="date">2026年3月1日</div>
+        </div>
+
+        <div class="content">
+            <!-- 市场概览 -->
+            <div class="section">
+                <h2 class="section-title">🌍 市场概览</h2>
+
+                <div class="market-grid">
+                    <div class="market-card">
+                        <h3><span class="flag">🇺🇸</span>美股市场</h3>
+                        <table>
+                            <tr>
+                                <th>指数</th>
+                                <th>收盘</th>
+                                <th>涨跌</th>
+                            </tr>
+                            <tr>
+                                <td>道琼斯</td>
+                                <td>48,804.06</td>
+                                <td class="down">⬇️ -1.66%</td>
+                            </tr>
+                            <tr>
+                                <td>标普500</td>
+                                <td>6,837.75</td>
+                                <td class="down">⬇️ -1.40%</td>
+                            </tr>
+                            <tr>
+                                <td>纳斯达克</td>
+                                <td>22,627.27</td>
+                                <td class="down">⬇️ -1.13%</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="market-card">
+                        <h3><span class="flag">🇬🇧</span>伦敦期货</h3>
+                        <table>
+                            <tr>
+                                <th>品种</th>
+                                <th>价格</th>
+                                <th>涨跌</th>
+                            </tr>
+                            <tr>
+                                <td>WTI原油</td>
+                                <td>$67.61/桶</td>
+                                <td class="up">⬆️ +3.68%</td>
+                            </tr>
+                            <tr>
+                                <td>布伦特原油</td>
+                                <td>$73.36/桶</td>
+                                <td class="up">⬆️ +3.56%</td>
+                            </tr>
+                            <tr>
+                                <td>现货黄金</td>
+                                <td>$5,238/盎司</td>
+                                <td class="up">⬆️ +1%</td>
+                            </tr>
+                            <tr>
+                                <td>现货白银</td>
+                                <td>$92.60/盎司</td>
+                                <td class="up">⬆️ +5%</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="market-card">
+                        <h3><span class="flag">🇨🇳</span>A股市场</h3>
+                        <table>
+                            <tr>
+                                <th>指数</th>
+                                <th>收盘</th>
+                                <th>涨跌</th>
+                            </tr>
+                            <tr>
+                                <td>上证指数</td>
+                                <td>4,162.88</td>
+                                <td class="up">⬆️ +0.39%</td>
+                            </tr>
+                            <tr>
+                                <td>深证成指</td>
+                                <td>14,495.09</td>
+                                <td class="down">⬇️ -0.06%</td>
+                            </tr>
+                            <tr>
+                                <td>创业板指</td>
+                                <td>3,310.30</td>
+                                <td class="down">⬇️ -1.04%</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="market-card">
+                        <h3><span class="flag">🇭🇰</span>香港股市</h3>
+                        <table>
+                            <tr>
+                                <th>指数</th>
+                                <th>收盘</th>
+                                <th>涨跌</th>
+                            </tr>
+                            <tr>
+                                <td>恒生指数</td>
+                                <td>-</td>
+                                <td class="up">⬆️ +0.66%</td>
+                            </tr>
+                            <tr>
+                                <td>恒生科技</td>
+                                <td>-</td>
+                                <td class="down">⬇️ -0.19%</td>
+                            </tr>
+                            <tr>
+                                <td>国企指数</td>
+                                <td>-</td>
+                                <td class="up">⬆️ +0.90%</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 今日热点事件 -->
+            <div class="section">
+                <h2 class="section-title">🔥 今日热点事件</h2>
+
+                <div class="event-card high">
+                    <div class="event-header">
+                        <span class="event-title">1. 存储芯片价格持续飙升</span>
+                        <span class="priority-badge high">🔴 高优先级</span>
+                    </div>
+                    <div class="event-meta">
+                        <span>📅 时间：2月28日</span> |
+                        <span>📰 来源：国家发改委价格监测中心、新浪财经</span>
+                    </div>
+                    <div class="event-content">
+                        <p>DRAM价格达13美元/片，环比上涨13.04%，创2016年以来最高。NAND闪存价格达12.67美元/片，环比暴涨33.91%，连续14个月上涨。PC DRAM合约价（DDR4 8GB）较上季度飙升110%-115%，达85美元。价格已传导至下游，电脑、手机价格上涨500-1500元。</p>
+                    </div>
+                </div>
+
+                <div class="event-card high">
+                    <div class="event-header">
+                        <span class="event-title">2. 英伟达计划推出新型AI推理芯片</span>
+                        <span class="priority-badge high">🔴 高优先级</span>
+                    </div>
+                    <div class="event-meta">
+                        <span>📅 时间：2月28日</span> |
+                        <span>📰 来源：华尔街日报、IT之家</span>
+                    </div>
+                    <div class="event-content">
+                        <p>英伟达正计划推出新型处理器，聚焦AI"推理"计算领域，优化AI模型对用户查询的响应能力。该芯片将采用Groq技术，预计3月在GTC开发者大会上正式亮相。OpenAI将成为该芯片的头部客户。</p>
+                    </div>
+                </div>
+
+                <div class="event-card medium">
+                    <div class="event-header">
+                        <span class="event-title">3. 美股三大指数集体下跌</span>
+                        <span class="priority-badge medium">🟡 中等优先级</span>
+                    </div>
+                    <div class="event-meta">
+                        <span>📅 时间：2月27日</span> |
+                        <span>📰 来源：金投网、新浪财经</span>
+                    </div>
+                    <div class="event-content">
+                        <p>美股三大指数全线收跌，道指跌1.66%，纳指跌1.13%，标普500跌1.40%。科技板块和银行股领跌，CoreWeave重挫17%，戴尔则因业绩指引强劲飙涨18%。美联储内部就未来降息路径的分歧加剧，令美股承压。</p>
+                    </div>
+                </div>
+
+                <div class="event-card medium">
+                    <div class="event-header">
+                        <span class="event-title">4. 央行下调外汇风险准备金率</span>
+                        <span class="priority-badge medium">🟡 中等优先级</span>
+                    </div>
+                    <div class="event-meta">
+                        <span>📅 时间：3月2日起</span> |
+                        <span>📰 来源：新浪财经</span>
+                    </div>
+                    <div class="event-content">
+                        <p>中国人民银行宣布自3月2日起，将远期售汇业务外汇风险准备金率从20%下调至0%。此举旨在降低企业购汇成本，释放抑制人民币过快升值的政策信号，以引导市场预期，保持汇率在合理均衡水平上的基本稳定。</p>
+                    </div>
+                </div>
+
+                <div class="event-card medium">
+                    <div class="event-header">
+                        <span class="event-title">5. A股小金属板块掀涨停潮</span>
+                        <span class="priority-badge medium">🟡 中等优先级</span>
+                    </div>
+                    <div class="event-meta">
+                        <span>📅 时间：2月27日</span> |
+                        <span>📰 来源：东方财富网</span>
+                    </div>
+                    <div class="event-content">
+                        <p>小金属、稀土、贵金属、能源金属等资源类板块涨幅居前，有色金属、煤炭、电力板块表现强势。沪深京三市成交额达到2.51万亿，较昨日小幅缩量504亿。上涨股票3193家、下跌1924家。</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 科技与芯片专题 -->
+            <div class="section">
+                <h2 class="section-title">💾 科技与芯片专题</h2>
+
+                <div class="chip-table">
+                    <h3>存储芯片价格追踪</h3>
+                    <table>
+                        <tr>
+                            <th>产品类型</th>
+                            <th>当前价格</th>
+                            <th>涨跌幅</th>
+                            <th>连续上涨月数</th>
+                        </tr>
+                        <tr>
+                            <td>DRAM (DDR4 8Gb)</td>
+                            <td>$13.00</td>
+                            <td class="up">⬆️ +13.04%</td>
+                            <td>11个月</td>
+                        </tr>
+                        <tr>
+                            <td>NAND Flash (128Gb)</td>
+                            <td>$12.67</td>
+                            <td class="up">⬆️ +33.91%</td>
+                            <td>14个月</td>
+                        </tr>
+                        <tr>
+                            <td>PC DRAM合约价 (DDR4 8GB)</td>
+                            <td>$85.00</td>
+                            <td class="up">⬆️ +110-115%</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>PC DRAM合约价 (DDR5 16GB)</td>
+                            <td>$140.00</td>
+                            <td class="up">⬆️ +118%</td>
+                            <td>-</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <h3 style="margin-top: 30px; color: #667eea;">AI芯片行业动态</h3>
+
+                <div class="event-card">
+                    <div class="event-header">
+                        <span class="event-title">1. 中国研发全柔性AI芯片</span>
+                    </div>
+                    <div class="event-meta">
+                        <span>📰 来源：新华网</span>
+                    </div>
+                    <div class="event-content">
+                        <p>清华大学、北京大学等机构成功研制FLEXI系列全柔性数字型存算一体芯片，薄如蝉翼，可随意弯折。该芯片采用"存算一体"架构，相当于把"记忆单元"和"计算单元"合二为一，更加高效。最小版本的FLEXI-1芯片可在仅55.94微瓦的超低功耗模式下运行。</p>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-header">
+                        <span class="event-title">2. 多家厂商发布新一代AI芯片</span>
+                    </div>
+                    <div class="event-content">
+                        <p>• <strong>英伟达</strong>：推出"薇拉·鲁宾"系统级AI算力平台，包含6款芯片</p>
+                        <p>• <strong>微软</strong>：发布AI芯片Maia 200</p>
+                        <p>• <strong>阿里巴巴平头哥</strong>：发布AI芯片"真武810E"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 个性化关注 -->
+            <div class="section">
+                <h2 class="section-title">⭐ 个性化关注</h2>
+
+                <div class="stock-grid">
+                    <div class="stock-card">
+                        <h4>🏭 半导体行业</h4>
+                        <p>• 存储芯片价格持续攀升，DRAM和NAND均创历史新高</p>
+                        <p>• 供需失衡引发涨价潮，全产业链提价趋势明显</p>
+                        <p>• A股小金属、稀土等资源类板块涨幅居前</p>
+                    </div>
+
+                    <div class="stock-card">
+                        <h4>🤖 AI应用</h4>
+                        <p>• AI硬件股集体大涨，CPO、铜缆、液冷服务器、PCB等板块表现强势</p>
+                        <p>• 天孚通信、申菱环境、华丰科技等多股盘中创出历史新高</p>
+                        <p>• 隔夜英伟达财报超预期提振AI产业链情绪</p>
+                    </div>
+
+                    <div class="stock-card">
+                        <h4>📊 A股市场</h4>
+                        <p>• 沪指涨0.39%，深成指跌0.06%，创业板指跌1.04%</p>
+                        <p>• 资源类板块受政策利好及地缘风险溢价驱动涨幅居前</p>
+                        <p>• 成交额2.51万亿，较昨日缩量504亿</p>
+                    </div>
+
+                    <div class="stock-card">
+                        <h4>🌍 港股市场</h4>
+                        <p>• 恒生指数涨0.66%，恒生科技指数跌0.19%</p>
+                        <p>• 有色金属板块集体走强，钢铁、稀土方向表现强势</p>
+                        <p>• 软件服务板块下跌，MINIMAX-WP跌超14%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 风险提示 -->
+            <div class="section">
+                <h2 class="section-title">⚠️ 风险提示</h2>
+
+                <div class="risk-section">
+                    <div class="risk-item">
+                        <h4>🟡 市场波动风险</h4>
+                        <p><strong>美股调整风险</strong>：三大指数集体下跌，道指跌1.66%，纳指跌1.13%，标普500跌1.40%。科技股存在回调压力。</p>
+                    </div>
+
+                    <div class="risk-item">
+                        <h4>🟡 港股科技股风险</h4>
+                        <p><strong>恒生科技指数风险</strong>：2月以来累计跌幅超10%，若从去年10月高点6715点算起，累计跌幅超过23%，已步入熊市通道。</p>
+                    </div>
+
+                    <div class="risk-item">
+                        <h4>🟡 价格上涨风险</h4>
+                        <p><strong>存储芯片涨价</strong>：已传导至下游消费电子产品，成本压力加大。DRAM和NAND价格均创历史新高，连续上涨超过11个月。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📋 报告日期：2026年3月1日 | 数据时间范围：过去24小时</p>
+            <p>免责声明：本报告基于公开信息整理，仅供参考，不构成投资建议。投资有风险，入市需谨慎。</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Netlify
+.netlify/
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

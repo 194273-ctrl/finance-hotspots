@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>财经热点日报 - {{date}}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        .report-meta {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #34495e;
+        }
+
+        .meta-icon {
+            font-size: 1.2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #ecf0f1;
+        }
+
+        .section-icon {
+            font-size: 1.8rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .market-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .market-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .market-card.us { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .market-card.london { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .market-card.china { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .market-card.hk { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); color: #333; }
+
+        .market-name {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .market-index {
+            margin-bottom: 10px;
+        }
+
+        .index-name {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .index-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 5px 0;
+        }
+
+        .index-change {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .change-positive { color: #2ecc71; }
+        .change-negative { color: #e74c3c; }
+
+        .hot-topic {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .hot-topic.priority-high {
+            border-left-color: #e74c3c;
+            background: #fff5f5;
+        }
+
+        .hot-topic.priority-medium {
+            border-left-color: #f39c12;
+            background: #fff9f0;
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .topic-badge {
+            background: #3498db;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .topic-badge.high { background: #e74c3c; }
+        .topic-badge.medium { background: #f39c12; }
+        .topic-badge.low { background: #95a5a6; }
+
+        .topic-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            flex: 1;
+        }
+
+        .topic-meta {
+            display: flex;
+            gap: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .topic-source {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .topic-content {
+            color: #34495e;
+            line-height: 1.8;
+        }
+
+        .tech-spotlight {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 2px solid #667eea;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .tech-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chip-price {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .chip-item {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .chip-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .chip-price-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #3498db;
+        }
+
+        .chip-change {
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .watchlist-item {
+            background: white;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .watchlist-item:hover {
+            border-color: #3498db;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.15);
+        }
+
+        .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .stock-code {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .stock-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .stock-news {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 12px;
+        }
+
+        .stock-news h4 {
+            font-size: 0.95rem;
+            color: #34495e;
+            margin-bottom: 5px;
+        }
+
+        .stock-news p {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .risk-alert {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .risk-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        .risk-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: rgba(255, 193, 7, 0.1);
+            border-radius: 8px;
+        }
+
+        .risk-icon {
+            font-size: 1.2rem;
+        }
+
+        .risk-content {
+            flex: 1;
+        }
+
+        .risk-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 5px;
+        }
+
+        .risk-desc {
+            color: #856404;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            color: #7f8c8d;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .timestamp {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .market-overview {
+                grid-template-columns: 1fr;
+            }
+
+            .report-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .chip-price {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📊 财经热点日报</h1>
+            <p class="subtitle">全面监控全球市场动态，专注科技与芯片领域</p>
+            
+            <div class="report-meta">
+                <div class="meta-item">
+                    <span class="meta-icon">📅</span>
+                    <span>{{date}}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">🕐</span>
+                    <span>{{updateTime}}</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">📰</span>
+                    <span>{{newsCount}} 条热点</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-icon">🎯</span>
+                    <span>{{watchlistCount}} 个关注项</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Overview -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-icon">📈</span>
+                <h2 class="section-title">市场概览</h2>
+            </div>
+
+            <div class="market-overview">
+                <div class="market-card us">
+                    <div class="market-name">🇺🇸 美股市场</div>
+                    {{#each usMarket}}
+                    <div class="market-index">
+                        <div class="index-name">{{name}}</div>
+                        <div class="index-value">{{value}}</div>
+                        <div class="index-change {{changeClass}}">{{change}} ({{changePercent}}%)</div>
+                    </div>
+                    {{/each}}
+                </div>
+
+                <div class="market-card london">
+                    <div class="market-name">🇬🇧 伦敦期货</div>
+                    {{#each londonMarket}}
+                    <div class="market-index">
+                        <div class="index-name">{{name}}</div>
+                        <div class="index-value">{{value}}</div>
+                        <div class="index-change {{changeClass}}">{{change}} ({{changePercent}}%)</div>
+                    </div>
+                    {{/each}}
+                </div>
+
+                <div class="market-card china">
+                    <div class="market-name">🇨🇳 A股市场</div>
+                    {{#each chinaMarket}}
+                    <div class="market-index">
+                        <div class="index-name">{{name}}</div>
+                        <div class="index-value">{{value}}</div>
+                        <div class="index-change {{changeClass}}">{{change}} ({{changePercent}}%)</div>
+                    </div>
+                    {{/each}}
+                </div>
+
+                <div class="market-card hk">
+                    <div class="market-name">🇭🇰 香港股市</div>
+                    {{#each hkMarket}}
+                    <div class="market-index">
+                        <div class="index-name">{{name}}</div>
+                        <div class="index-value">{{value}}</div>
+                        <div class="index-change {{changeClass}}">{{change}} ({{changePercent}}%)</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+
+        <!-- Hot Topics -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-icon">🔥</span>
+                <h2 class="section-title">今日热点事件</h2>
+            </div>
+
+            {{#each hotTopics}}
+            <div class="hot-topic priority-{{priority}}">
+                <div class="topic-header">
+                    <span class="topic-badge {{priority}}">{{priorityText}}</span>
+                    <h3 class="topic-title">{{title}}</h3>
+                </div>
+                <div class="topic-meta">
+                    <div class="topic-source">
+                        <span>📰</span>
+                        <span>{{source}}</span>
+                    </div>
+                    <div class="topic-time">
+                        <span>🕐</span>
+                        <span>{{time}}</span>
+                    </div>
+                </div>
+                <div class="topic-content">
+                    {{content}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        <!-- Tech & Chip Focus -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-icon">💾</span>
+                <h2 class="section-title">科技与芯片专题</h2>
+            </div>
+
+            <div class="tech-spotlight">
+                <div class="tech-title">
+                    <span>🎯</span>
+                    <span>存储芯片价格追踪</span>
+                </div>
+                <div class="chip-price">
+                    {{#each chipPrices}}
+                    <div class="chip-item">
+                        <div class="chip-name">{{name}}</div>
+                        <div class="chip-price-value">{{price}}</div>
+                        <div class="chip-change {{changeClass}}">{{change}} {{trend}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+
+            {{#each techNews}}
+            <div class="hot-topic">
+                <div class="topic-header">
+                    <span class="topic-badge">科技</span>
+                    <h3 class="topic-title">{{title}}</h3>
+                </div>
+                <div class="topic-content">
+                    {{content}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        <!-- Personal Watchlist -->
+        <div class="section">
+            <div class="section-header">
+                <span class="section-icon">⭐</span>
+                <h2 class="section-title">个性化关注</h2>
+            </div>
+
+            {{#each watchlist}}
+            <div class="watchlist-item">
+                <div class="stock-header">
+                    <span class="stock-code">{{code}} - {{name}}</span>
+                    <span class="stock-price {{changeClass}}">{{price}} {{change}}</span>
+                </div>
+                <div class="stock-news">
+                    <h4>最新动态</h4>
+                    <p>{{news}}</p>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        <!-- Risk Alert -->
+        <div class="section">
+            <div class="risk-alert">
+                <div class="risk-header">
+                    <span>⚠️</span>
+                    <span>风险提示</span>
+                </div>
+
+                {{#each risks}}
+                <div class="risk-item">
+                    <span class="risk-icon">{{icon}}</span>
+                    <div class="risk-content">
+                        <div class="risk-title">{{title}}</div>
+                        <div class="risk-desc">{{description}}</div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="timestamp">
+                报告生成时间: {{generationTime}}
+            </div>
+            <p>本报告由 AI 财经监控系统自动生成，仅供参考，不构成投资建议</p>
+        </div>
+    </div>
+</body>
+</html>
